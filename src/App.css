@@ -1,124 +1,137 @@
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
+:root {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --border: #e8e0d5;
+  --sage: #5a7a5a;
+  --sage-light: #edf2ed;
+  --rose: #c4847a;
+  --rose-light: #f8efed;
+  --text: #2d2926;
+  --text-muted: #8a7f76;
+  --shadow: 0 4px 20px rgba(90, 70, 50, 0.08);
+  --shadow-hover: 0 8px 32px rgba(90, 70, 50, 0.14);
+  --radius: 20px;
+  --font-display: 'Fraunces', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Layout ─────────────────────────────────── */
-
 .app {
-  max-width: 920px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 56px 28px 80px;
+  padding: 40px 24px;
 }
 
 h1 {
   font-family: var(--font-display);
-  font-size: 2.6rem;
+  font-size: 32px;
   font-weight: 700;
+  letter-spacing: -0.5px;
   color: var(--text);
-  letter-spacing: -0.02em;
-  line-height: 1;
-  margin-bottom: 6px;
-  animation: fadeInUp 0.6s ease both;
+  margin-bottom: 4px;
 }
 
 .subtitle {
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--text-2);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin-bottom: 44px;
-  animation: fadeInUp 0.6s ease 0.05s both;
+  margin-bottom: 32px;
+  color: var(--text-muted);
+  font-size: 15px;
 }
 
-/* ── Summary Cards ───────────────────────────── */
-
+/* Summary cards */
 .summary {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr;
-  gap: 12px;
-  margin-bottom: 16px;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .summary-card {
-  background: var(--card);
+  flex: 1;
+  background: var(--surface);
   border: 1px solid var(--border);
-  padding: 22px 26px;
-  transition: border-color 0.2s;
-  animation: fadeInUp 0.6s ease both;
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeUp 0.4s ease both;
 }
 
-.summary-card:nth-child(1) { animation-delay: 0.1s; }
-.summary-card:nth-child(2) { animation-delay: 0.15s; }
-.summary-card:nth-child(3) {
-  animation-delay: 0.2s;
-  border-color: var(--gold-dim);
-  background: linear-gradient(135deg, #161410 0%, var(--card) 100%);
-}
+.summary-card:nth-child(1) { animation-delay: 0.05s; }
+.summary-card:nth-child(2) { animation-delay: 0.10s; }
+.summary-card:nth-child(3) { animation-delay: 0.15s; }
 
-.summary-card:hover { border-color: var(--border-hover); }
-.summary-card:nth-child(3):hover { border-color: rgba(201, 168, 76, 0.3); }
+.summary-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
 
 .summary-card h3 {
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 500;
-  color: var(--text-2);
-  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
 }
 
-.income-amount,
-.expense-amount,
+.income-amount {
+  font-family: var(--font-display);
+  color: var(--sage);
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.expense-amount {
+  font-family: var(--font-display);
+  color: var(--rose);
+  font-size: 26px;
+  font-weight: 600;
+}
+
 .balance-amount {
-  font-family: var(--font-mono);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text);
 }
 
-.income-amount  { font-size: 1.9rem; color: var(--income); }
-.expense-amount { font-size: 1.9rem; color: var(--expense); }
-.balance-amount { font-size: 2.4rem; color: var(--gold); }
-
-/* ── Spend By Category ───────────────────────── */
-
+/* Chart card */
 .spend-by-category {
-  background: var(--card);
+  background: var(--surface);
   border: 1px solid var(--border);
-  padding: 24px 26px;
-  margin-bottom: 16px;
-  animation: fadeInUp 0.6s ease 0.25s both;
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
 }
 
 .spend-by-category h2 {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 17px;
   font-weight: 600;
   color: var(--text);
-  letter-spacing: -0.01em;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
-/* ── Add Transaction Form ────────────────────── */
-
+/* Add transaction */
 .add-transaction {
-  background: var(--card);
+  background: var(--surface);
   border: 1px solid var(--border);
-  padding: 24px 26px;
-  margin-bottom: 16px;
-  animation: fadeInUp 0.6s ease 0.3s both;
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
 }
 
 .add-transaction h2 {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 17px;
   font-weight: 600;
   color: var(--text);
-  letter-spacing: -0.01em;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 form {
@@ -129,139 +142,123 @@ form {
 
 form input,
 form select {
-  background: var(--surface);
+  padding: 9px 13px;
   border: 1px solid var(--border);
-  color: var(--text);
-  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 14px;
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  background: var(--bg);
+  color: var(--text);
   outline: none;
-  transition: border-color 0.2s;
-  appearance: none;
+  transition: border-color 0.15s;
 }
 
-form input::placeholder { color: var(--text-3); }
-
 form input:focus,
-form select:focus { border-color: var(--gold-dim); box-shadow: 0 0 0 2px var(--gold-dim); }
+form select:focus {
+  border-color: var(--sage);
+}
 
-form input[type="text"]   { flex: 2; min-width: 140px; }
-form input[type="number"] { flex: 1; min-width: 90px; }
-form select               { flex: 1; min-width: 100px; cursor: pointer; }
-
-form select option { background: var(--surface); }
+form input[type="text"] { flex: 2; }
+form input[type="number"] { flex: 1; }
+form select { flex: 1; }
 
 form button {
   padding: 9px 22px;
-  background: var(--gold);
-  color: #0a0a0a;
+  background: var(--sage);
+  color: #fff;
   border: none;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  border-radius: 10px;
   cursor: pointer;
-  transition: opacity 0.15s, transform 0.15s;
+  font-size: 14px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  transition: background 0.15s, transform 0.1s;
 }
 
-form button:hover  { opacity: 0.88; transform: translateY(-1px); }
-form button:active { opacity: 1; transform: translateY(0); }
+form button:hover {
+  background: #4a6849;
+  transform: translateY(-1px);
+}
 
-/* ── Transaction List ────────────────────────── */
-
+/* Transaction list */
 .transactions {
-  background: var(--card);
+  background: var(--surface);
   border: 1px solid var(--border);
-  padding: 24px 26px;
-  animation: fadeInUp 0.6s ease 0.35s both;
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
 }
 
 .transactions h2 {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 17px;
   font-weight: 600;
   color: var(--text);
-  letter-spacing: -0.01em;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .filters {
   display: flex;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .filters select {
-  background: var(--surface);
+  padding: 6px 10px;
   border: 1px solid var(--border);
-  color: var(--text-2);
-  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 13px;
   font-family: var(--font-body);
-  font-size: 0.8rem;
-  letter-spacing: 0.02em;
-  outline: none;
-  cursor: pointer;
-  appearance: none;
-  transition: border-color 0.2s, color 0.2s;
+  background: var(--bg);
+  color: var(--text);
 }
-
-.filters select:focus,
-.filters select:hover { border-color: var(--border-hover); color: var(--text); }
-
-.filters select option { background: var(--surface); }
 
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-thead tr {
+thead {
+  background: var(--bg);
+}
+
+th, td {
+  padding: 11px 10px;
+  text-align: left;
   border-bottom: 1px solid var(--border);
+  font-size: 14px;
 }
 
 th {
-  font-size: 0.65rem;
-  font-weight: 500;
-  color: var(--text-2);
-  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 0 12px 10px;
-  text-align: left;
+  color: var(--text-muted);
 }
 
-th:first-child, td:first-child { padding-left: 0; }
-
-td {
-  padding: 13px 12px;
-  font-size: 0.875rem;
-  color: var(--text);
-  border-bottom: 1px solid var(--border);
+tbody tr:last-child td {
+  border-bottom: none;
 }
 
-tbody tr { transition: background 0.15s; }
-tbody tr:hover { background: rgba(255, 255, 255, 0.02); }
-tbody tr:last-child td { border-bottom: none; }
-
-.income-amount,
-.expense-amount {
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
+tbody tr:hover td {
+  background: var(--bg);
 }
 
 .delete-btn {
-  padding: 4px 12px;
+  padding: 4px 10px;
   background: transparent;
-  border: 1px solid var(--text-3);
-  color: var(--text-2);
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
+  border: 1px solid var(--rose);
+  color: var(--rose);
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  font-size: 12px;
+  font-family: var(--font-body);
+  border-radius: 7px;
+  transition: background 0.15s, color 0.15s;
 }
 
 .delete-btn:hover {
-  border-color: var(--expense);
-  color: var(--expense);
-  background: rgba(248, 113, 113, 0.06);
+  background: var(--rose);
+  color: #fff;
 }
