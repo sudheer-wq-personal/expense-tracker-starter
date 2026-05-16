@@ -18,7 +18,7 @@ function TransactionList({ transactions, onDelete }) {
 
   return (
     <div className="transactions">
-      <h2>Transactions</h2>
+      <h2>Transactions ({filtered.length})</h2>
       <div className="filters">
         <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
           <option value="all">All Types</option>
