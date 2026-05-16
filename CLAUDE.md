@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
+npm install      # install dependencies
 npm run dev      # Start dev server at http://localhost:5173
 npm run build    # Production build
 npm run preview  # Preview production build
@@ -15,19 +16,21 @@ There are no tests configured in this project.
 
 ## Architecture
 
-This is a single-component React app (`src/App.jsx`) built with Vite. All state — transactions list, form fields, and filter state — lives in `App` via `useState`. There is no routing, no global state library, and no backend; data is in-memory only and resets on page reload.
+React 19 + Vite app. No router, no global state library, no backend — data is in-memory only and resets on page reload.
+
+`App` is a thin orchestrator that holds the `transactions` array in state and passes it down:
+
+- **`src/Summary.jsx`** — receives `transactions`, derives and displays `totalIncome`, `totalExpenses`, `balance`
+- **`src/TransactionForm.jsx`** — owns form state (`description`, `amount`, `type`, `category`), calls `onAdd` prop with a new transaction object on submit
+- **`src/TransactionList.jsx`** — owns filter state (`filterType`, `filterCategory`), renders the filtered transaction table
 
 ### Data shape
 
-Each transaction has: `{ id, description, amount, type, category, date }`.  
-- `type` is `"income"` or `"expense"`  
-- `category` is one of: `food`, `housing`, `utilities`, `transport`, `entertainment`, `salary`, `other`  
-- `amount` is stored as a string (form input value), but arithmetic is performed on it directly — a known bug where string concatenation occurs instead of numeric addition.
-
-### Known issue
-
-`totalIncome` and `totalExpenses` use `.reduce((sum, t) => sum + t.amount, 0)` where `t.amount` is a string, so the reduce concatenates strings instead of summing numbers. Fix by parsing: `sum + parseFloat(t.amount)`.
+Each transaction: `{ id, description, amount, type, category, date }`  
+- `amount` is a number (parsed via `parseFloat` on form submit)  
+- `type`: `"income"` or `"expense"`  
+- `category`: `food`, `housing`, `utilities`, `transport`, `entertainment`, `salary`, `other`
 
 ### Styling
 
-Plain CSS in `src/App.css` with no CSS framework. Key classes: `.income-amount` (green), `.expense-amount` (red), `.balance-amount`. A `.delete-btn` class exists in the CSS but delete functionality is not yet implemented in the component.
+Plain CSS in `src/App.css`, no framework. Key classes: `.income-amount` (green), `.expense-amount` (red), `.balance-amount`, `.delete-btn` (styled but delete not yet implemented).
