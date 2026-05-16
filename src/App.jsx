@@ -16,13 +16,21 @@ function App() {
     { id: 8, description: "Netflix", amount: 15, type: "expense", category: "entertainment", date: "2025-01-10" },
   ]);
 
+  const handleAdd = (t) => {
+    setTransactions([...transactions, t]);
+  };
+
+  const handleDelete = (id) => {
+    setTransactions(transactions.filter(t => t.id !== id));
+  };
+
   return (
     <div className="app">
       <h1>Finance Tracker</h1>
       <p className="subtitle">Track your income and expenses</p>
       <Summary transactions={transactions} />
-      <TransactionForm onAdd={(t) => setTransactions([...transactions, t])} />
-      <TransactionList transactions={transactions} />
+      <TransactionForm onAdd={handleAdd} />
+      <TransactionList transactions={transactions} onDelete={handleDelete} />
     </div>
   );
 }

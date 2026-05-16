@@ -2,13 +2,19 @@ import { useState } from 'react'
 
 const categories = ["food", "housing", "utilities", "transport", "entertainment", "salary", "other"];
 
-function TransactionList({ transactions }) {
+function TransactionList({ transactions, onDelete }) {
   const [filterType, setFilterType] = useState("all");
   const [filterCategory, setFilterCategory] = useState("all");
 
   let filtered = transactions;
   if (filterType !== "all") filtered = filtered.filter(t => t.type === filterType);
   if (filterCategory !== "all") filtered = filtered.filter(t => t.category === filterCategory);
+
+  const handleDelete = (t) => {
+    if (window.confirm(`Delete "${t.description}" ($${t.amount})?`)) {
+      onDelete(t.id);
+    }
+  };
 
   return (
     <div className="transactions">
@@ -26,7 +32,7 @@ function TransactionList({ transactions }) {
       </div>
       <table>
         <thead>
-          <tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th></tr>
+          <tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th>Actions</th></tr>
         </thead>
         <tbody>
           {filtered.map(t => (
@@ -36,6 +42,9 @@ function TransactionList({ transactions }) {
               <td>{t.category}</td>
               <td className={t.type === "income" ? "income-amount" : "expense-amount"}>
                 {t.type === "income" ? "+" : "-"}${t.amount}
+              </td>
+              <td>
+                <button className="delete-btn" onClick={() => handleDelete(t)}>Delete</button>
               </td>
             </tr>
           ))}
