@@ -49,6 +49,18 @@ h1 {
   font-weight: bold;
 }
 
+.spend-by-category {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 24px;
+  background: #fff;
+}
+
+.spend-by-category h2 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
 .add-transaction {
   border: 1px solid #ddd;
   padding: 16px;
