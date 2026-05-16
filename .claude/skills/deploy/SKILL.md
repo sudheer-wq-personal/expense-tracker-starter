@@ -1,4 +1,12 @@
-/Deploy the app to staging by running these steps in order. Stop and report the error if any step fails — do not proceed to the next step.
+---
+name: deploy
+description: >
+  Deploy the app by running lint, building the production bundle, and pushing
+  to the target environment. Stop on any failure.
+type: lifecycle
+---
+
+Deploy the app to staging by running these steps in order. Stop and report the error if any step fails — do not proceed to the next step.
 
 ## Steps
 
